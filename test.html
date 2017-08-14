@@ -13,7 +13,7 @@
     <style type="text/css">
     #header {
         background-color: black;
-        padding-top: 200px;
+        padding-top: 100px;
         padding-left: 50px;
         padding-bottom: 50px;
         padding-right: 50px;
@@ -33,7 +33,7 @@
     .btn-circle {
         width: 70px;
         height: 70px;
-        margin-top: 150px;
+        margin-top: 10px;
         padding: 7px 16px;
         border: 2px solid #fff;
         border-radius: 100%!important;
@@ -59,6 +59,11 @@
         /*-webkit-transform: rotate(20deg);*/
         /*-webkit-transform: scale(1.5 ,1.5);*/
     }
+
+    .logoblack:hover {
+      animation: spin 0.5s ease infinite;
+    }
+
 
 
 
@@ -101,10 +106,12 @@
 
     .title>div>h1 {
         font-size: 32pt;
+        color: white;
     }
 
     .title>div>small {
         font-size: 28pt;
+        color: white;
     }
 
     .logo {
@@ -152,7 +159,7 @@
         <div class="container-fluid" id="header">
             <div class="row">
                 <a href="#{{team.name.toLowerCase()}}" ng-repeat="team in teams.slice(0,4)" class="col-md-3">
-                    <img class="logo img-responsive" src="img/{{team.name.toLowerCase()}}-black.png">
+                    <img class="logo logoblack img-responsive" src="img/{{team.name.toLowerCase()}}-black.png">
                 </a>
             </div>
             <div class="row title">
@@ -163,14 +170,8 @@
             </div>
             <div class="row">
                 <a href="#{{team.name.toLowerCase()}}" ng-repeat="team in teams.slice(4,teams.length)" class="col-md-3">
-                    <img class="logo img-responsive" src="img/{{team.name.toLowerCase()}}-black.png">
+                    <img class="logo logoblack img-responsive" src="img/{{team.name.toLowerCase()}}-black.png">
                 </a>
-            </div>
-            <div class="row">
-                <div class="col-md-3">Hugo</div>
-                <div class="col-md-3">Freelanzete</div>
-                <div class="col-md-3">Chaka</div>
-                <div class="col-md-3">Mokoia</div>
             </div>
             <div class="row text-center">
                 <a href="#about" class="btn btn-circle page-scroll">
