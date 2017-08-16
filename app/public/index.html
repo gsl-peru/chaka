@@ -3,6 +3,8 @@
 
 <head>
     <title>GSL-Peru Demo Day</title>
+    <meta charset="utf-8">
+    <link rel='shortcut icon' type='image/x-icon' href='/favicon.ico' />
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
     <script src="https://use.fontawesome.com/914be1c8fb.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -61,8 +63,8 @@
     }
 
     .logoblack:hover {
-      animation: spin 0.5s ease;
-      cursor: pointer;  
+        animation: spin 0.5s ease;
+        cursor: pointer;
     }
 
 
@@ -101,8 +103,8 @@
         font-size: 16pt;
     }
 
-    .team{
-      padding-top: 80px;
+    .team {
+        padding-top: 80px;
     }
 
     .title>div>h1 {
@@ -114,6 +116,7 @@
         font-size: 28pt;
         color: white;
     }
+
     .title {
         margin-top: 20px;
         margin-bottom: 20px;
@@ -134,11 +137,13 @@
     .bg-primary {
         background-color: #F05F40;
     }
-    #top{
-      height: 100%;
+
+    #top {
+        height: 100%;
     }
-    .col-half-offset{
-        margin-left:3%
+
+    .col-half-offset {
+        margin-left: 3%
     }
     </style>
 </head>
@@ -154,9 +159,7 @@
                     <div class="dropdown">
                         <a class="navbar-brand" href="#about">Teams</a>
                         <ul class="dropdown-menu dropdown-menu-inverse" aria-labelledby="dropdownMenu1">
-          
                             <li><a ng-repeat="team in teams" href="#{{team.name.toLowerCase()}}">{{team.name}}</a></li>
-                  
                         </ul>
                     </div>
                 </li>
@@ -201,7 +204,9 @@
                     <img src="img/{{team.name.toLowerCase()}}-white.png" class="logo" style="">
                 </div>
                 <div class="col-md-8">
-                    <p class="lead description">{{team.blurb}} <br><br><a ng-if="team.url" href="{{team.url}}">{{team.url}}</a> </p>
+                    <p class="lead description">{{team.blurb}}</p>
+                    <a ng-if="team.url" class="lead description" href="{{team.url}}" ng-click="alert(team.url)">{{team.url}}</a>
+               
                 </div>
                 <div class="col-md-2 vcenter">
                     <img src="img/vote-button.png " ng-click="alert(team.name)" class="vote" data-toggle="modal" data-target="#myModal">
@@ -217,54 +222,54 @@
             </div>
         </div>
     </div>
-
-      <!-- Modal -->
-  <div class="modal fade" id="myModal" role="dialog">
-    <div class="modal-dialog modal-sm">
-      <div class="modal-content">
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Vote</h4>
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Vote</h4>
+                </div>
+                <div class="modal-body">
+                    <p>You have voted for {{lastvote}}</p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="modal-body">
-          <p>You have voted for {{lastvote}}</p>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-        </div>
-      </div>
     </div>
-  </div>
-
     <script type="text/javascript">
+    $(document).on('click', 'a', function(event) {
+        if ($($.attr(this, 'href')).offset()) {
+            event.preventDefault();
 
-    $(document).on('click', 'a', function(event){
-      event.preventDefault();
+            $('html, body').animate({
+                scrollTop: $($.attr(this, 'href')).offset().top
+            }, 500);
+        }
 
-        $('html, body').animate({
-            scrollTop: $( $.attr(this, 'href') ).offset().top
-        }, 500);
     });
 
     var app = angular.module('gsl', []);
     app.controller('gslCtrl', function($scope) {
-
+        $scope.myVar = "http://www.google.com"
         $scope.teams = [
             { name: "Hugo", blurb: "We are Hugo and we want to virtually connect teachers with students and, as a result, we will improve learning by making it easier and faster." },
-            { name: "Chaka", blurb: "The word Chaka means bridge in Quechua; such is our goal, to be a bridge between our Peruvian culture and the world. It is for this reason that we are dedicated to the   e-commerce of national handicrafts and textiles.\n\n We provide a friendly user platform to our clients, so you can acquire Peruvian handmade crafts easily and with the assurance that your product has a high quality. Finally, we take care that your product arrives to your house; by this we make sure that you always will have the best of our regions at your disposal.", url: "http://www.chaka.pe" },
-            { name: "Morkoia", blurb: "Morkoia is a shared web storage with a social component that allows you to contribute to family albums and secure forever your memories in a cloud that will help you organize media by theme, year and other tags you choose, sharing these only with your family providing privacy that social media lacks and the certainty that your memories won't be lost knowing your loved ones will have access to the photos and videos you choose to be remembered for"},
-            {name: "Studium", blurb: "Studium is an online platform that helps high schoolers choose a career path by connecting them with university students who provide varied, clear and quality information that is essential for their decision."},
-            {name: "Ucook", blurb: "Ucook is a mobile app that allows people to know what and how to cook with the ingredients they have considering their preferences, thus not spending money and time on restaurants or delivery."},
-            {name: "Sportaneous", blurb: "Sportaneous, a new way to enhance your running experience"},
-            {name:"Koplan", blurb:"Koplan was born as a solution to the inefficient process of searching for better opportunities or courses advisors and for unproductive advisory time management on academic an professional topics by university students."},
-            {name: "Nutta", blurb: "Nutta is a mobile application dedicated to the Peruvian family to inform, suggest and provide real and immediate balanced and healthy food. Creating a direct connection between the user and proper nutrition"},
-            {name: "Freelanzate", blurb: "Learn getting your first freelance jobs or access to a new talent"}
+            { name: "Chaka", blurb: "The word Chaka means bridge in Quechua; such is our goal, to be a bridge between our Peruvian culture and the world. It is for this reason that we are dedicated to the   e-commerce of national handicrafts and textiles.\n\nWe provide a friendly user platform to our clients, so you can acquire Peruvian handmade crafts easily and with the assurance that your product has a high quality. Finally, we take care that your product arrives to your house; by this we make sure that you always will have the best of our regions at your disposal.", url: "http://www.chaka.pe" },
+            { name: "Morkoia", blurb: "Morkoia is a shared web storage with a social component that allows you to contribute to family albums and secure forever your memories in a cloud that will help you organize media by theme, year and other tags you choose, sharing these only with your family providing privacy that social media lacks and the certainty that your memories won't be lost knowing your loved ones will have access to the photos and videos you choose to be remembered for" },
+            { name: "Studium", blurb: "Studium is an online platform that helps high schoolers choose a career path by connecting them with university students who provide varied, clear and quality information that is essential for their decision." },
+            { name: "Ucook", blurb: "Ucook is a mobile app that allows people to know what and how to cook with the ingredients they have considering their preferences, thus not spending money and time on restaurants or delivery." },
+            { name: "Sportaneous", blurb: "Sportaneous, a new way to enhance your running experience" },
+            { name: "Koplan", blurb: "Koplan was born as a solution to the inefficient process of searching for better opportunities or courses advisors and for unproductive advisory time management on academic an professional topics by university students." },
+            { name: "Nutta", blurb: "Nutta is a mobile application dedicated to the Peruvian family to inform, suggest and provide real and immediate balanced and healthy food. Creating a direct connection between the user and proper nutrition" },
+            { name: "Freelanzate", blurb: "Learn getting your first freelance jobs or access to a new talent" }
         ];
-        $scope.alert = function(x) { 
+        $scope.alert = function(x) {
             $scope.lastvote = x;
-            $.post('/vote', {name: x}, function(response) {
+            $.post('/vote', { name: x }, function(response) {
                 // body...
-            }, 'json') 
+            }, 'json')
         }
 
     });
