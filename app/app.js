@@ -20,7 +20,9 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
+var get_ip = require('ipware')().get_ip;
 app.use(express.static(path.join(__dirname, 'public')));
+
 
 var MongoClient = require('mongodb').MongoClient;
 var url = "mongodb://localhost:27017/gslvote";
@@ -35,6 +37,7 @@ MongoClient.connect(url, function(err, db) {
 app.post('/vote',function(req,res){
     console.log(req.body)
     var vote = req.body
+    vote.ip_info = get_ip(req);
     console.log("vote", vote)
     app.db.collection("votes").insertOne(vote, function(err){
         if (err) throw err;
